@@ -934,6 +934,7 @@ type CreateTableStmt struct {
 	Partition   *PartitionOptions
 	OnDuplicate OnDuplicateKeyHandlingType
 	Select      ResultSetNode
+	Placements  []*PlacementSpec
 }
 
 // Restore implements Node interface.
@@ -1773,6 +1774,7 @@ const (
 	TableOptionTableCheckSum
 	TableOptionUnion
 	TableOptionEncryption
+	TableOptionPlacement
 )
 
 // RowFormat types
