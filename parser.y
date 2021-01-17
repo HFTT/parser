@@ -10358,6 +10358,10 @@ TableOption:
 		yylex.AppendError(yylex.Errorf("The SECONDARY_ENGINE clause is parsed but ignored by all storage engines."))
 		parser.lastErrorAsWarn()
 	}
+|	"LOCAL"
+	{
+		$$ = &ast.TableOption{Tp: ast.TableOptionLocal, IsLocal: true}
+	}
 |	"UNION" EqOpt '(' TableNameListOpt ')'
 	{
 		// Parse it but will ignore it

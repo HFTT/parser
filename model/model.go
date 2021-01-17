@@ -276,6 +276,7 @@ type TableInfo struct {
 	// IsCommonHandle is true when clustered index feature is
 	// enabled and the primary key is not a single integer column.
 	IsCommonHandle bool `json:"is_common_handle"`
+	IsLocalTable   bool `json:"is_local_table"`
 
 	Comment         string `json:"comment"`
 	AutoIncID       int64  `json:"auto_inc_id"`

@@ -926,6 +926,7 @@ type CreateTableStmt struct {
 
 	IfNotExists bool
 	IsTemporary bool
+	IsLocal     bool
 	Table       *TableName
 	ReferTable  *TableName
 	Cols        []*ColumnDef
@@ -1774,7 +1775,7 @@ const (
 	TableOptionTableCheckSum
 	TableOptionUnion
 	TableOptionEncryption
-	TableOptionPlacement
+	TableOptionLocal
 )
 
 // RowFormat types
@@ -1819,6 +1820,7 @@ type TableOption struct {
 	StrValue   string
 	UintValue  uint64
 	TableNames []*TableName
+	IsLocal    bool
 }
 
 func (n *TableOption) Restore(ctx *format.RestoreCtx) error {
