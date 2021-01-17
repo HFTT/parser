@@ -1241,6 +1241,7 @@ import (
 	PlacementOptions                       "Placement rules options"
 	PlacementSpec                          "Placement rules specification"
 	PlacementSpecList                      "Placement rules specifications"
+	PlacementSpecListOpt                   "Placement rules specifications option"
 
 %type	<ident>
 	AsOpt             "AS or EmptyString"
@@ -1524,6 +1525,15 @@ PlacementSpec:
 		spec := &ast.PlacementSpec{Role: $4.(ast.PlacementRole)}
 		spec.Tp = ast.PlacementDrop
 		$$ = spec
+	}
+
+PlacementSpecListOpt:
+	{
+		$$ = []*ast.PlacementSpec{}
+	}
+|	PlacementSpecList
+	{
+		$$ = $1
 	}
 
 PlacementSpecList:
@@ -3508,7 +3518,7 @@ DatabaseOptionList:
  *      )
  *******************************************************************/
 CreateTableStmt:
-	"CREATE" OptTemporary "TABLE" IfNotExists TableName TableElementListOpt CreateTableOptionListOpt PlacementSpecList PartitionOpt DuplicateOpt AsOpt CreateTableSelectOpt
+	"CREATE" OptTemporary "TABLE" IfNotExists TableName TableElementListOpt CreateTableOptionListOpt PlacementSpecListOpt PartitionOpt DuplicateOpt AsOpt CreateTableSelectOpt
 	{
 		stmt := $6.(*ast.CreateTableStmt)
 		stmt.Table = $5.(*ast.TableName)
